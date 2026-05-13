@@ -3,486 +3,713 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El caso Rocha Moya — Análisis Prospectivo</title>
+<title>Edgar Robles — Análisis Político</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap');
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
 
   :root {
-    --bg: #0a0a0a;
-    --bg-card: #111;
-    --bg-alt: #141414;
-    --rule: #1e1e1e;
-    --rule-light: #282828;
-    --ink: #d4d0c8;
-    --ink-soft: #858076;
-    --ink-muted: #444;
-    --red: #b02020;
-    --red-dim: #5a1010;
-    --red-bg: rgba(176,32,32,0.07);
-    --blue-light: #4a88ae;
-    --blue-bg: rgba(74,136,174,0.08);
-    --blue-dim: #1a3448;
-    --amber-bg: rgba(180,130,40,0.08);
-    --gold: #b08838;
-    --gold-dim: #5a4418;
-    --mono: 'IBM Plex Mono', 'Courier New', monospace;
-    --sans: 'IBM Plex Sans', -apple-system, sans-serif;
-    --serif: Georgia, serif;
+    --bg: #080810;
+    --bg2: #0e0e1a;
+    --bg3: #13131f;
+    --border: #1e1e30;
+    --border-accent: #2a2a45;
+    --text: #c8c8d8;
+    --text-dim: #6a6a88;
+    --text-faint: #3a3a55;
+    --red: #c0392b;
+    --red-dim: #7a1f18;
+    --red-bright: #e74c3c;
+    --amber: #d4951a;
+    --amber-dim: #8a5f0e;
+    --green: #27ae60;
+    --white: #e8e8f0;
+    --mono: 'IBM Plex Mono', monospace;
   }
 
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.7; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
 
-  /* HERO */
-  .hero {
-    max-width: 760px;
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(8,8,16,0.97);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-inner {
+    max-width: 960px;
     margin: 0 auto;
-    padding: 56px 36px 44px;
-    border-bottom: 1px solid var(--rule);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
   }
 
-  .hero-title {
-    font-family: var(--mono);
-    font-size: clamp(24px, 4.5vw, 38px);
-    font-weight: 600;
-    line-height: 1.1;
-    color: #fff;
-    letter-spacing: -0.01em;
-    margin-bottom: 8px;
-  }
-
-  .meta-strip {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    gap: 0;
-    border: 1px solid var(--rule-light);
-    width: fit-content;
-    margin-bottom: 28px;
-    border-radius: 1px;
-    overflow: hidden;
-  }
-
-  .meta-cell {
-    padding: 8px 16px;
-    border-right: 1px solid var(--rule-light);
-  }
-  .meta-cell:last-child { border-right: none; }
-
-  .meta-key {
-    font-family: var(--mono);
-    font-size: 7.5px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-bottom: 3px;
-  }
-  .meta-val {
-    font-family: var(--mono);
+  .nav-brand {
     font-size: 11px;
-    color: var(--ink-soft);
-  }
-
-  .hero-sub {
-    font-size: 13px;
-    color: var(--ink-soft);
-    line-height: 1.85;
-    font-weight: 400;
-    max-width: 580px;
-    border-left: 1px solid var(--rule-light);
-    padding-left: 16px;
-  }
-
-  /* PAGE */
-  .page { max-width: 760px; margin: 0 auto; padding: 44px 36px 72px; }
-
-  /* NARRATIVE */
-  .narrative { margin-bottom: 36px; }
-  .narrative p {
-    font-size: 14.5px;
-    line-height: 1.9;
-    color: var(--ink-soft);
-    margin-bottom: 16px;
-    font-family: var(--serif);
-  }
-  .narrative p:last-child { margin-bottom: 0; }
-  .narrative .lead { font-size: 16px; color: var(--ink); }
-  .narrative strong { color: #e0dcd4; font-style: normal; font-weight: 600; }
-
-  .divider { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    margin-bottom: 16px;
-  }
-
-  /* BOXES */
-  .box {
-    border-radius: 1px;
-    padding: 16px 18px;
-    margin-bottom: 10px;
-    background: var(--bg-card);
-    border: 1px solid var(--rule-light);
-  }
-  .box-red { border-left: 2px solid var(--red); }
-  .box-amber { border-left: 2px solid var(--gold); }
-
-  .box-label {
-    font-family: var(--mono);
-    font-size: 8.5px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .box-label-red { color: var(--red); }
-  .box-label-amber { color: var(--gold); }
-  .box-text { font-size: 13px; color: var(--ink); line-height: 1.75; font-weight: 400; }
-
-  .pull-quote {
-    font-size: 13px;
-    font-style: italic;
-    color: var(--gold);
-    border-left: 1px solid var(--gold-dim);
-    padding-left: 14px;
-    margin-top: 12px;
-    font-family: var(--serif);
-    line-height: 1.6;
-    opacity: 0.8;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-transform: uppercase;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--mono);
   }
 
-  /* VARS */
-  .vars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 36px; }
-  .var-block { border: 1px solid var(--rule-light); padding: 12px 14px; background: var(--bg-card); }
-  .var-type { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 10px; }
-  .var-up { color: var(--red); }
-  .var-down { color: var(--blue-light); }
-  .var-items { font-size: 12px; color: var(--ink); line-height: 1.75; font-weight: 400; }
+  .nav-brand span { color: var(--red-bright); }
 
-  /* CARDS */
-  .scenario-card {
-    background: var(--bg-card);
-    border: 1px solid var(--rule-light);
-    margin-bottom: 12px;
-    overflow: hidden;
-    transition: border-color 0.15s;
+  .nav-links { display: flex; list-style: none; }
+
+  .nav-links a {
+    display: block;
+    padding: 0 18px;
+    height: 52px;
+    line-height: 52px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-left: 1px solid var(--border);
+    transition: color 0.2s, background 0.2s;
+    cursor: pointer;
   }
-  .scenario-card:hover { border-color: #343434; }
 
-  .card-top { padding: 20px 22px 18px; }
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--white);
+    background: rgba(255,255,255,0.03);
+  }
 
-  .scenario-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+  /* VIEWS */
+  .view { display: none; padding-top: 52px; min-height: 100vh; }
+  .view.active { display: block; }
 
-  .scenario-number { font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; color: var(--ink-muted); margin-bottom: 6px; }
-  .scenario-name { font-family: var(--mono); font-size: 14px; font-weight: 600; color: #dedad2; line-height: 1.3; }
+  /* LANDING */
+  #view-inicio.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
 
-  .prob-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
-  .prob-pill { font-family: var(--mono); font-size: 16px; font-weight: 600; padding: 4px 12px; border-radius: 1px; white-space: nowrap; }
-  .prob-change { font-family: var(--mono); font-size: 9px; white-space: nowrap; }
-  .change-up { color: var(--red); }
-  .change-down { color: var(--blue-light); }
+  .landing-inner {
+    max-width: 640px;
+    width: 100%;
+    padding: 24px;
+  }
 
-  .p-blue { background: var(--blue-bg); color: var(--blue-light); border: 1px solid var(--blue-dim); }
-  .p-red { background: var(--red-bg); color: #c84040; border: 1px solid var(--red-dim); }
-  .p-amber { background: var(--amber-bg); color: var(--gold); border: 1px solid var(--gold-dim); }
-  .p-gray { background: #161616; color: #4a4a4a; border: 1px solid #242424; }
+  .landing-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
 
-  .bar-wrap { height: 1px; background: var(--rule-light); margin-bottom: 18px; }
-  .bar { height: 1px; }
+  .landing-card {
+    background: var(--bg2);
+    padding: 28px 32px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--mono);
+  }
 
-  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .full-col { grid-column: 1 / -1; }
-  .meta-label { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; }
-  .meta-value { font-size: 12.5px; color: var(--ink); line-height: 1.65; font-weight: 400; }
+  .landing-card:hover { background: var(--bg3); }
 
-  /* CONSEQUENCES */
-  .conseq-block { border-top: 1px solid var(--rule); background: var(--bg-alt); padding: 16px 22px 18px; }
-  .conseq-label { font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 14px; }
-  .conseq-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .conseq-item { display: flex; gap: 14px; align-items: flex-start; }
-  .conseq-num { font-family: var(--mono); font-size: 9px; color: var(--ink-muted); flex-shrink: 0; margin-top: 2px; width: 16px; }
-  .conseq-text { font-size: 12.5px; color: var(--ink); line-height: 1.65; font-weight: 400; }
-  .conseq-text strong { font-weight: 600; color: var(--ink); }
+  .card-num { display: block; font-size: 10px; color: var(--text-faint); letter-spacing: 0.15em; margin-bottom: 10px; }
+  .card-title { display: block; font-size: 14px; font-weight: 600; color: var(--white); letter-spacing: 0.04em; margin-bottom: 6px; }
+  .card-desc { display: block; font-size: 12px; color: var(--text-dim); }
 
-  /* TOTAL */
-  .total-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 22px; background: #fff; margin-top: 4px; }
-  .total-label { font-family: var(--mono); font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 0.16em; }
-  .total-value { font-family: var(--mono); font-size: 16px; font-weight: 600; color: #111; }
+  /* SECTION */
+  .section-inner { max-width: 960px; margin: 0 auto; padding: 56px 24px 80px; }
 
-  /* FOOTER */
-  .footer-block { margin-top: 36px; border-top: 1px solid var(--rule); padding-top: 20px; }
-  .footer-text { font-family: var(--mono); font-size: 10px; color: var(--ink-muted); line-height: 1.9; margin-bottom: 4px; letter-spacing: 0.01em; }
+  .section-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
 
-  /* RESPONSIVE */
-  @media (max-width: 580px) {
-    .hero, .page { padding-left: 18px; padding-right: 18px; }
-    .meta-strip { grid-template-columns: 1fr 1fr; width: 100%; }
-    .vars-grid { grid-template-columns: 1fr; }
-    .meta-grid { grid-template-columns: 1fr; }
-    .scenario-header { flex-direction: column; gap: 10px; }
-    .prob-wrap { flex-direction: row; align-items: center; gap: 10px; }
+  .section-eyebrow { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; }
+  .section-title { font-size: clamp(16px, 2.5vw, 22px); font-weight: 600; color: var(--white); letter-spacing: 0.03em; }
+
+  .back-btn {
+    font-size: 10px; color: var(--text-faint); letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; background: none; border: 1px solid var(--border); padding: 6px 14px;
+    font-family: var(--mono); transition: color 0.2s, border-color 0.2s;
+  }
+
+  .back-btn:hover { color: var(--text); border-color: var(--border-accent); }
+
+  /* CALIBRACION */
+  .calibracion { border: 1px solid var(--border); margin-bottom: 48px; background: var(--bg2); }
+
+  .calibracion-header {
+    padding: 18px 28px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+
+  .calibracion-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red-bright); font-weight: 600; }
+  .calibracion-date { font-size: 10px; color: var(--text-faint); letter-spacing: 0.1em; }
+  .calibracion-body { padding: 28px; }
+
+  .doc-meta { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--border); margin-bottom: 28px; }
+  .doc-meta-cell { padding: 12px 18px; border-right: 1px solid var(--border); }
+  .doc-meta-cell:last-child { border-right: none; }
+  .doc-meta-cell label { display: block; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 3px; }
+  .doc-meta-cell span { font-size: 11px; color: var(--text); }
+
+  .intro-text {
+    font-size: 12px; line-height: 1.9; color: var(--text-dim); margin-bottom: 32px;
+    padding: 20px; border-left: 2px solid var(--border-accent); background: rgba(255,255,255,0.015);
+  }
+
+  .divider-label { display: block; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 16px; margin-top: 28px; }
+
+  .variable { border-left: 3px solid var(--border-accent); padding: 16px 20px; margin-bottom: 14px; background: rgba(255,255,255,0.01); }
+  .variable.ruptura { border-left-color: var(--red); }
+  .variable.nueva { border-left-color: var(--amber); }
+
+  .variable-title { font-size: 11px; font-weight: 600; color: var(--white); margin-bottom: 8px; letter-spacing: 0.04em; }
+
+  .badge { display: inline-block; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 7px; margin-right: 8px; background: var(--red-dim); color: var(--red-bright); font-weight: 600; }
+  .badge.amber { background: var(--amber-dim); color: var(--amber); }
+
+  .variable-text { font-size: 12px; color: var(--text-dim); line-height: 1.8; }
+  .variable-quote { margin-top: 10px; padding: 8px 14px; border-left: 2px solid var(--text-faint); font-size: 11px; color: var(--text-dim); font-style: italic; }
+
+  .signal-section { margin: 24px 0; }
+  .signal-label { display: block; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 10px; }
+  .signal-group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .signal-tag { font-size: 10px; padding: 3px 10px; background: rgba(192,57,43,0.1); border: 1px solid var(--red-dim); color: var(--red-bright); letter-spacing: 0.04em; }
+  .signal-tag.down { background: rgba(39,174,96,0.08); border-color: rgba(39,174,96,0.25); color: var(--green); }
+
+  .scenario { border: 1px solid var(--border); margin-bottom: 10px; background: var(--bg); }
+
+  .scenario-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .scenario-num { font-size: 9px; color: var(--text-faint); letter-spacing: 0.1em; min-width: 40px; }
+  .scenario-title { flex: 1; font-size: 12px; font-weight: 600; color: var(--white); letter-spacing: 0.03em; }
+  .scenario-prob { font-size: 14px; font-weight: 600; text-align: right; }
+  .scenario-prob.up { color: var(--red-bright); }
+  .scenario-prob.down { color: var(--green); }
+  .scenario-prob-delta { display: block; font-size: 9px; font-weight: 400; color: var(--text-faint); text-align: right; letter-spacing: 0.05em; }
+
+  .scenario-body { padding: 18px 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .scenario-col label { display: block; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .scenario-col p { font-size: 11px; color: var(--text-dim); line-height: 1.7; }
+
+  .scenario-consequences { border-top: 1px solid var(--border); padding: 14px 20px; }
+  .scenario-consequences label { display: block; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 10px; }
+  .consequence { display: flex; gap: 12px; margin-bottom: 7px; }
+  .consequence-num { font-size: 9px; color: var(--text-faint); min-width: 22px; padding-top: 1px; }
+  .consequence p { font-size: 11px; color: var(--text-dim); line-height: 1.7; }
+  .consequence p strong { color: var(--text); font-weight: 500; }
+
+  .prob-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); margin: 20px 0; }
+  .prob-table th { padding: 10px 16px; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); border-bottom: 1px solid var(--border); text-align: left; background: var(--bg); }
+  .prob-table th:not(:first-child) { text-align: right; border-left: 1px solid var(--border); }
+  .prob-table td { padding: 10px 16px; font-size: 12px; color: var(--text-dim); border-bottom: 1px solid var(--border); }
+  .prob-table td:not(:first-child) { text-align: right; border-left: 1px solid var(--border); }
+  .prob-table tr:last-child td { border-bottom: none; font-weight: 600; color: var(--white); background: var(--bg3); }
+  .prob-up { color: var(--red-bright) !important; font-weight: 600; }
+  .prob-down { color: var(--green) !important; font-weight: 600; }
+
+  .metodologia { border-top: 1px solid var(--border); padding-top: 18px; margin-top: 28px; }
+  .metodologia p { font-size: 10px; color: var(--text-faint); line-height: 1.8; margin-bottom: 5px; }
+  .metodologia strong { color: var(--text-dim); font-weight: 500; }
+
+  .placeholder { border: 1px dashed var(--border); padding: 60px 48px; text-align: center; color: var(--text-faint); }
+  .placeholder p { font-size: 11px; letter-spacing: 0.05em; }
+
+  @media (max-width: 680px) {
+    .scenario-body { grid-template-columns: 1fr; }
+    .doc-meta { grid-template-columns: 1fr; }
+    .doc-meta-cell { border-right: none; border-bottom: 1px solid var(--border); }
+    .doc-meta-cell:last-child { border-bottom: none; }
+    .nav-links a { padding: 0 10px; font-size: 9px; }
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sinaloa Gov. Ruben Rocha extradited to US by May 15?",
+  "description": "Prediction market: Yes 2% · No 98% on Polymarket.",
+  "url": "https://polymarket.com/event/sinaloa-gov-ruben-rocha-extradited-to-us-by",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Polymarket",
+    "url": "https://polymarket.com"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sinaloa Gov. Ruben Rocha arrested by May 31?",
+  "description": "Prediction market: Yes 20% · No 80% on Polymarket.",
+  "url": "https://polymarket.com/event/sinaloa-gov-ruben-rocha-arrested-by-may-31",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Polymarket",
+    "url": "https://polymarket.com"
+  }
+}
+</script>
+</script>
 </head>
 <body>
 
-<div class="hero">
-  <h1 class="hero-title">EL CASO ROCHA MOYA</h1>
-
-  <div class="meta-strip">
-    <div class="meta-cell">
-      <p class="meta-key">Fecha</p>
-      <p class="meta-val">05 MAY 2026</p>
-    </div>
-    <div class="meta-cell">
-      <p class="meta-key">Metodología</p>
-      <p class="meta-val">Bayesiana aplicada</p>
-    </div>
-    <div class="meta-cell">
-      <p class="meta-key">Autor</p>
-      <p class="meta-val">Edgar Robles</p>
-    </div>
+<nav>
+  <div class="nav-inner">
+    <button class="nav-brand" onclick="showView('inicio')">narco<span>tips</span></button>
+    <ul class="nav-links">
+      <li><a onclick="showView('analisis')" id="nav-analisis">Análisis</a></li>
+      <li><a onclick="showView('predicciones')" id="nav-predicciones">Predicciones</a></li>
+      <li><a onclick="showView('polymarket')" id="nav-polymarket">Polymarket</a></li>
+      <li><a onclick="window.open('https://jpoetica.wordpress.com','_blank')" id="nav-columnas">Columnas ↗</a></li>
+      <li><a onclick="window.open('https://narcopoliticos.com/','_blank')" id="nav-narco">Narcopolíticos ↗</a></li>
+    </ul>
   </div>
+</nav>
 
-  <p class="hero-sub">Este análisis examina la crisis político-diplomática detonada por las acusaciones del Departamento de Justicia de Estados Unidos contra el gobernador de Sinaloa, Rubén Rocha Moya, y sus implicaciones sistémicas sobre la permanencia de Morena en el poder y la relación bilateral México–Estados Unidos, mediante análisis prospectivo de escenarios con actualización bayesiana, integrando nueve variables observables en cuatro rondas de recalibración.</p>
+<!-- LANDING -->
+<div id="view-inicio" class="view active">
+  <div class="landing-inner">
+    <div style="margin-bottom: 40px;">
+      <h1 style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; letter-spacing: -0.02em; color: var(--white); line-height: 1;">narco<span style="color: var(--red-bright);">tips</span></h1>
+      <p style="margin-top: 14px; font-size: 12px; color: var(--text-dim); letter-spacing: 0.04em;">Análisis de la crisis narco-política en México. Datos, escenarios y probabilidades sobre lo que viene.</p>
+    </div>
+    <div class="landing-cards">
+      <button class="landing-card" onclick="showView('analisis')">
+        <span class="card-num">01</span>
+        <span class="card-title">Análisis Caso Rocha Moya</span>
+        <span class="card-desc">Dos calibraciones documentadas. 5 escenarios. 9 variables activas.</span>
+      </button>
+      <button class="landing-card" onclick="showView('predicciones')">
+        <span class="card-num">02</span>
+        <span class="card-title">Predicciones</span>
+        <span class="card-desc">Análisis prospectivos sobre otros actores y escenarios políticos.</span>
+      </button>
+      <button class="landing-card" onclick="showView('polymarket')">
+        <span class="card-num">03</span>
+        <span class="card-title">Polymarket</span>
+        <span class="card-desc">Mercados de predicción activos sobre la crisis política México–Estados Unidos.</span>
+      </button>
+      <button class="landing-card" onclick="window.open('https://jpoetica.wordpress.com','_blank')">
+        <span class="card-num">04</span>
+        <span class="card-title">Columnas ↗</span>
+        <span class="card-desc">Columnas de opinión sobre política, poder y crimen organizado en México.</span>
+      </button>
+      <button class="landing-card" onclick="window.open('https://narcopoliticos.com/','_blank')">
+        <span class="card-num">05</span>
+        <span class="card-title">Narcopolíticos ↗</span>
+        <span class="card-desc">Base de datos de políticos con vínculos documentados al crimen organizado.</span>
+      </button>
+    </div>
+    <p style="margin-top: 20px; font-size: 10px; color: var(--text-faint); letter-spacing: 0.08em;">Autor: Edgar <span style="color: var(--red-bright);">Robles</span> · Análisis Caso Rocha Moya asistido por Claude Sonnet 4.6</p>
+  </div>
+</div>
+<div id="view-analisis" class="view">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">// 01 · Análisis de caso</p>
+        <h2 class="section-title">El Caso Rocha Moya</h2>
+      </div>
+      <button class="back-btn" onclick="showView('inicio')">← Inicio</button>
+    </div>
+
+    <!-- CALIBRACIÓN I -->
+    <div class="calibracion">
+      <div class="calibracion-header">
+        <span class="calibracion-label">Calibración I · Rondas 1–4</span>
+        <span class="calibracion-date">05 Mayo 2026</span>
+      </div>
+      <div class="calibracion-body">
+        <div class="doc-meta">
+          <div class="doc-meta-cell"><label>Fecha</label><span>05 MAY 2026</span></div>
+          <div class="doc-meta-cell"><label>Metodología</label><span>Bayesiana aplicada</span></div>
+          <div class="doc-meta-cell"><label>Autor</label><span>Edgar Robles</span></div>
+        </div>
+
+        <div class="intro-text">
+          Este análisis examina la crisis político-diplomática detonada por las acusaciones del Departamento de Justicia de Estados Unidos contra el gobernador de Sinaloa, Rubén Rocha Moya, y sus implicaciones sistémicas sobre la permanencia de Morena en el poder y la relación bilateral México–Estados Unidos, mediante análisis prospectivo de escenarios con actualización bayesiana, integrando nueve variables observables — acusaciones del DOJ, presencia confirmada de la CIA en territorio mexicano, doctrina NDCS 2026, precedentes de acción unilateral en Irán y Venezuela, déficit diplomático estructural de la cancillería mexicana, eliminación de la independencia de la Suprema Corte como factor de certeza jurídica, estrategia electoral de Morena vía red Bienestar, efecto dominó sobre la arquitectura de financiamiento electoral de 2021, y retórica de confrontación directa con la administración Trump — en cuatro rondas de recalibración que llevaron la probabilidad de acción unilateral estadounidense del 5% inicial al 25%, y redujeron el escenario de stalemate del 38% al 20%, reflejando una presión asimétrica creciente sobre un gobierno que enfrenta esta crisis sin canal de interlocución real, sin leverage negociador y con una retórica que le entregó a Washington el marco narrativo para escalar.
+        </div>
+
+        <span class="divider-label">// Variables críticas</span>
+
+        <div class="variable">
+          <div class="variable-title">▌ Déficit diplomático estructural</div>
+          <p class="variable-text">México llega a esta crisis sin capital político acumulado en Washington, sin relaciones informales con la administración Trump y sin instrumentos de presión equivalentes. Sin canal de interlocución real, cada posición es pública y por lo tanto imposible de revertir sin costo político. No es una debilidad táctica — es una debilidad estructural que acorta el margen de maniobra en todos los escenarios.</p>
+        </div>
+
+        <div class="variable ruptura">
+          <div class="variable-title"><span class="badge">Variable de ruptura</span>▌ Retórica de la soberanía y conquista · 5 mayo 2026</div>
+          <p class="variable-text">Las declaraciones de Sheinbaum revelan un error de lectura estratégico: creer que la retórica de soberanía tiene poder disuasorio sobre Estados Unidos. Optar por la narrativa de la soberanía y la conquista no es confrontación calculada — es un regalo político. Le otorga el marco narrativo que necesita para que cualquier escalada se lea como respuesta legítima. Trump no opera con la lógica de administraciones anteriores. Opera con lógica de dominancia — necesita una victoria visible para las midterms y una declaración de este tipo debilita aún más la posición negociadora de México.</p>
+          <div class="variable-quote">"A quienes reviven la Conquista como salvación, les decimos: están destinados a la derrota."</div>
+        </div>
+
+        <div class="signal-section">
+          <span class="signal-label">↑ Elevan riesgo de escalada</span>
+          <div class="signal-group">
+            <span class="signal-tag">CIA confirmada en territorio MX</span>
+            <span class="signal-tag">Strikes cinéticos ejecutados</span>
+            <span class="signal-tag">NDCS 2026: doctrina formal</span>
+            <span class="signal-tag">Precedente Irán y Venezuela</span>
+            <span class="signal-tag">Déficit de interlocución en DC</span>
+            <span class="signal-tag">Suprema Corte sin independencia</span>
+            <span class="signal-tag">Retórica Conquista</span>
+            <span class="signal-tag">Midterms nov 2026</span>
+            <span class="signal-tag">El Mayo como testigo latente</span>
+          </div>
+          <span class="signal-label">↓ Frenan escalada</span>
+          <div class="signal-group">
+            <span class="signal-tag down">TMEC como costo mutuo</span>
+            <span class="signal-tag down">Sector privado EU integrado con MX</span>
+            <span class="signal-tag down">Montiel operando red Bienestar</span>
+            <span class="signal-tag down">Costo reputacional de acción directa</span>
+            <span class="signal-tag down">Congreso EU como freno electoral</span>
+          </div>
+        </div>
+
+        <span class="divider-label">// Cinco escenarios · Estimaciones a 05 Mayo 2026</span>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-num">01 / 05</span>
+            <span class="scenario-title">Cascada de acusaciones — escalada EU</span>
+            <div><span class="scenario-prob up">35%</span><span class="scenario-prob-delta">↑ desde 28%</span></div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-col"><label>Condición activadora</label><p>México no actúa. La retórica de la soberanía elimina incentivos de Washington para negociar. DOJ libera las cinco acusaciones pendientes sin mediación previa posible.</p></div>
+            <div class="scenario-col"><label>Actores clave</label><p>DOJ, embajador Johnson, Trump. El Mayo Zambada como detonador testimonial. Sector empresarial EU presionado por pérdida de certeza jurídica.</p></div>
+            <div class="scenario-col"><label>Señal de alerta temprana</label><p>Filtración de expedientes de Marina del Pilar o Durazo. Visa revocada a funcionario federal. Actividad procesal en Corte del Distrito Oeste de Texas.</p></div>
+          </div>
+          <div class="scenario-consequences">
+            <label>// Consecuencias si ocurre</label>
+            <div class="consequence"><span class="consequence-num">01</span><p><strong>Morena pierde gobernadores en funciones.</strong> Marina del Pilar, Durazo y Villarreal enfrentan acusaciones formales. La estructura de poder territorial de Morena entra en colapso parcial antes de 2027.</p></div>
+            <div class="consequence"><span class="consequence-num">02</span><p><strong>El TMEC se convierte en rehén.</strong> Washington usa las acusaciones como palanca directa en la mesa de revisión del 1 de julio. México negocia desde una posición de máxima debilidad.</p></div>
+            <div class="consequence"><span class="consequence-num">03</span><p><strong>El testimonio de El Mayo se activa.</strong> Rocha ya no es el único problema — es la puerta a un expediente que salpica hasta AMLO.</p></div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-num">02 / 05</span>
+            <span class="scenario-title">Acción unilateral EU en territorio mexicano</span>
+            <div><span class="scenario-prob up">25%</span><span class="scenario-prob-delta">↑ desde 5%</span></div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-col"><label>Condición activadora</label><p>Retórica de la soberanía le otorga a Trump el marco narrativo. CIA con presencia operativa. NDCS provee doctrina. Midterms nov 2026 requieren victoria visible.</p></div>
+            <div class="scenario-col"><label>Actores clave</label><p>Pentágono, CIA, DEA, Trump. Ausencia de interlocución política desde México elimina señal de freno diplomático.</p></div>
+            <div class="scenario-col"><label>Señal de alerta temprana</label><p>Declaraciones de Rubio o Hegseth sobre acción directa. Movimiento de activos militares en frontera. Precedente ejecutado en otro país de la región.</p></div>
+          </div>
+          <div class="scenario-consequences">
+            <label>// Consecuencias si ocurre</label>
+            <div class="consequence"><span class="consequence-num">01</span><p><strong>Crisis constitucional en México.</strong> Las fuerzas armadas quedan en posición imposible — responder implica un conflicto abierto; no responder destruye la narrativa de soberanía que sostiene al gobierno.</p></div>
+            <div class="consequence"><span class="consequence-num">02</span><p><strong>Precedente hemisférico irreversible.</strong> Cualquier país de América Latina con presencia de cárteles queda expuesto a la misma doctrina. La soberanía territorial como principio se erosiona formalmente.</p></div>
+            <div class="consequence"><span class="consequence-num">03</span><p><strong>Sheinbaum sin salida política.</strong> Resistir es imposible militarmente. Ceder destruye el proyecto de la 4T. El escenario no tiene desenlace que preserve el gobierno en los términos actuales.</p></div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-num">03 / 05</span>
+            <span class="scenario-title">Stalemate prolongado</span>
+            <div><span class="scenario-prob down">20%</span><span class="scenario-prob-delta">↓ desde 38%</span></div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-col"><label>Condición activadora</label><p>Ambos actores absorben el costo sin resolución. TMEC se negocia por carril separado. FGR dilata indefinidamente.</p></div>
+            <div class="scenario-col"><label>Actores clave</label><p>Sheinbaum, Alcalde, Montiel, AMLO como veto silencioso. Sector privado de ambos países como freno mutuo involuntario.</p></div>
+            <div class="scenario-col"><label>Señal de alerta temprana</label><p>Rocha mantiene escolta federal. FGR no emite dictamen. Cancillería en modo protocolar sin avance concreto.</p></div>
+          </div>
+          <div class="scenario-consequences">
+            <label>// Consecuencias si ocurre</label>
+            <div class="consequence"><span class="consequence-num">01</span><p><strong>La impunidad se institucionaliza.</strong> El sistema demuestra que puede proteger a sus operadores frente a presión exterior. Eso no es una victoria — es una señal de precio para futuras acusaciones.</p></div>
+            <div class="consequence"><span class="consequence-num">02</span><p><strong>Morena llega a 2027 con el expediente abierto.</strong> El stalemate no cierra el caso — lo congela. Cualquier candidato carga con el peso de Rocha, Villarreal y Marina del Pilar como lastre electoral.</p></div>
+            <div class="consequence"><span class="consequence-num">03</span><p><strong>La relación bilateral se administra en modo de daño mínimo.</strong> Sin resolución y sin ruptura, México pierde influencia progresiva en cada mesa donde no tiene leverage.</p></div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-num">04 / 05</span>
+            <span class="scenario-title">Ruptura diplomática parcial</span>
+            <div><span class="scenario-prob down">12%</span><span class="scenario-prob-delta">↓ desde 18%</span></div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-col"><label>Condición activadora</label><p>EU impone sanciones OFAC y aranceles sectoriales. Suprema Corte sin independencia usada como argumento técnico en revisión del TMEC.</p></div>
+            <div class="scenario-col"><label>Actores clave</label><p>Tesoro EU, USTR, sector empresarial estadounidense. Ebrard como amortiguador desde Economía.</p></div>
+            <div class="scenario-col"><label>Señal de alerta temprana</label><p>Designación OFAC de funcionario federal mexicano. USTR menciona rule of law en declaraciones sobre TMEC. Suspensión de mesas de seguridad bilateral.</p></div>
+          </div>
+          <div class="scenario-consequences">
+            <label>// Consecuencias si ocurre</label>
+            <div class="consequence"><span class="consequence-num">01</span><p><strong>El nearshoring entra en pausa.</strong> Las designaciones OFAC y la pérdida formal de certeza jurídica detienen decisiones de inversión que dependían de la estabilidad institucional mexicana.</p></div>
+            <div class="consequence"><span class="consequence-num">02</span><p><strong>El TMEC se renegocia desde debilidad máxima.</strong> Washington usa el argumento de la Suprema Corte para imponer condiciones en el capítulo de solución de controversias.</p></div>
+            <div class="consequence"><span class="consequence-num">03</span><p><strong>La presión migra del gobierno al mercado.</strong> El sector privado mexicano empieza a presionar a Sheinbaum desde adentro con más fuerza que Washington desde afuera.</p></div>
+          </div>
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-header">
+            <span class="scenario-num">05 / 05</span>
+            <span class="scenario-title">México cede a Rocha bajo presión extrema</span>
+            <div><span class="scenario-prob down">8%</span><span class="scenario-prob-delta">↓ desde 11%</span></div>
+          </div>
+          <div class="scenario-body">
+            <div class="scenario-col"><label>Condición activadora</label><p>Costo acumulado supera el costo del efecto dominó. Pero la retórica de la soberanía hace imposible ceder sin destrucción política interna.</p></div>
+            <div class="scenario-col"><label>Actores clave</label><p>Sheinbaum, García Harfuch, FGR. Sin leverage, las condiciones las dicta Washington y México no puede aceptarlas públicamente.</p></div>
+            <div class="scenario-col"><label>Señal de alerta temprana</label><p>Cambio abrupto de tono en FGR. Rocha pierde escolta federal. Silencio prolongado de AMLO. Viaje discreto de funcionario de alto nivel a Washington sin agenda declarada.</p></div>
+          </div>
+          <div class="scenario-consequences">
+            <label>// Consecuencias si ocurre</label>
+            <div class="consequence"><span class="consequence-num">01</span><p><strong>La entrega no detiene la cascada.</strong> El DOJ continúa. Entregar a Rocha abre el canal por el cual el testimonio destruye lo que queda de la arquitectura política de Morena.</p></div>
+            <div class="consequence"><span class="consequence-num">02</span><p><strong>Fractura irreparable dentro de Morena.</strong> Ceder después de la retórica de la Conquista es capitulación pública. El bloque legislativo y los gobernadores pierden razón para mantenerse unidos.</p></div>
+            <div class="consequence"><span class="consequence-num">03</span><p><strong>2027 sin candidato viable.</strong> Cualquier figura de Morena carga con el expediente abierto, el antecedente de la cesión y la narrativa de que el proyecto fue exactamente lo que la oposición decía que era.</p></div>
+          </div>
+        </div>
+
+        <div class="metodologia">
+          <p><strong>SUMA DE PROBABILIDADES:</strong> 100%</p>
+          <p><strong>VARIABLES INTEGRADAS:</strong> CIA en territorio MX · doctrina NDCS 2026 · precedentes Irán–Venezuela · déficit diplomático estructural · Suprema Corte sin independencia · retórica de soberanía y conquista · efecto dominó Morena · calendario electoral bilateral</p>
+          <p><strong>HORIZONTE DE VALIDEZ:</strong> Mayo–Julio 2026 · REVISAR ANTE: acusaciones adicionales DOJ · revisión TMEC (01 JUL 2026) · midterms EU (NOV 2026)</p>
+          <p><strong>METODOLOGÍA:</strong> Análisis prospectivo de escenarios con actualización bayesiana · Cuatro rondas de recalibración · Movimientos clave: probabilidad de acción unilateral 5% → 25% · escenario de stalemate 38% → 20%</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEPARADOR -->
+    <div style="display:flex; align-items:center; gap:20px; margin: 48px 0 40px;">
+      <div style="flex:1; height:1px; background: var(--border);"></div>
+      <div style="border:1px solid var(--amber); padding: 8px 20px; white-space:nowrap;">
+        <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); font-weight:600;">Nueva calibración · 13 Mayo 2026</span>
+      </div>
+      <div style="flex:1; height:1px; background: var(--border);"></div>
+    </div>
+
+    <!-- CALIBRACIÓN II -->
+    <div class="calibracion" style="border-color: var(--amber-dim);">
+      <div class="calibracion-header" style="border-bottom-color: var(--amber-dim); background: rgba(212,149,26,0.04);">
+        <span class="calibracion-label">Calibración II · Ronda 5</span>
+        <span class="calibracion-date">13 Mayo 2026</span>
+      </div>
+      <div class="calibracion-body">
+        <div class="doc-meta">
+          <div class="doc-meta-cell"><label>Fecha</label><span>13 MAY 2026</span></div>
+          <div class="doc-meta-cell"><label>Ronda</label><span>5 — Nuevas variables</span></div>
+          <div class="doc-meta-cell"><label>Autor</label><span>Edgar Robles</span></div>
+        </div>
+
+        <span class="divider-label">// Nuevas variables incorporadas · 13 Mayo 2026</span>
+
+        <div class="variable nueva">
+          <div class="variable-title"><span class="badge amber">Nueva</span>▌ Hegseth: advertencia formal de intervención</div>
+          <p class="variable-text">El Secretario de Defensa pone en mesa pública la doctrina de acción unilateral. No es presión retórica — es cobertura institucional para que el Pentágono actúe. Cualquier operación posterior tiene ahora respaldo político declarado al más alto nivel del aparato de seguridad estadounidense.</p>
+        </div>
+
+        <div class="variable nueva">
+          <div class="variable-title"><span class="badge amber">Nueva</span>▌ Jefe de la DEA: "solo el principio"</div>
+          <p class="variable-text">Es señal de pipeline activo. Indica que hay expedientes listos, en etapas procesales avanzadas, esperando decisión política para liberarse. La arquitectura legal ya está construida — lo que falta es la orden.</p>
+        </div>
+
+        <div class="variable ruptura">
+          <div class="variable-title"><span class="badge">Variable de ruptura narrativa</span>▌ CNN publica operaciones letales de la CIA en México con video · 12 Mayo 2026</div>
+          <p class="variable-text">La variable más pesada del lote. La CIA ya era factor en el modelo — pero como presencia. Ahora es hecho público con nombre, fecha y método: la eliminación de Francisco Beltrán "El Payín", operador de nivel medio del Cártel de Sinaloa, mediante dispositivo explosivo en su vehículo en el Estado de México en marzo. Ground Branch. Operativo elite. La CIA no negó los hechos — llamó al reporte "una campaña de relaciones públicas para los cárteles." No es una negación. Es un ataque al motivo. CNN publicó un segundo exclusivo esta mañana ampliando la campaña.</p>
+          <p class="variable-text" style="margin-top:10px;">Lo que CNN publicó no es periodismo en sentido neutro. Es andamiaje narrativo. El video no necesita ser auténtico para ser efectivo — necesita ser creído, y ya lo es. Es el mismo patrón previo a Irak, Irán, Venezuela. La audiencia global ya tiene el marco. Cualquier acción posterior de EU se lee como respuesta, no como agresión.</p>
+        </div>
+
+        <div class="variable">
+          <div class="variable-title"><span class="badge amber">Nueva</span>▌ García Harfuch niega el reporte de CNN</div>
+          <p class="variable-text">Repetición del error estructural. Negar con video disponible no cancela el hecho — lo amplifica. Le entrega a Washington el mismo marco narrativo que la retórica de la Conquista: un gobierno que miente, no coopera, y protege a los cárteles. El secretario de Seguridad acaba de hacer más costosa cualquier salida diplomática y más barata cualquier escalada.</p>
+        </div>
+
+        <span class="divider-label">// Actualización de probabilidades · Rondas 4 → 5</span>
+
+        <table class="prob-table">
+          <thead>
+            <tr>
+              <th>Escenario</th><th>Ronda 4</th><th>Ronda 5</th><th>Δ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>01 · Cascada de acusaciones — escalada EU</td><td>35%</td><td class="prob-up">37%</td><td class="prob-up">↑ +2</td></tr>
+            <tr><td>02 · Acción unilateral EU en territorio mexicano</td><td>25%</td><td class="prob-up">38%</td><td class="prob-up">↑ +13</td></tr>
+            <tr><td>03 · Stalemate prolongado</td><td>20%</td><td class="prob-down">10%</td><td class="prob-down">↓ −10</td></tr>
+            <tr><td>04 · Ruptura diplomática parcial</td><td>12%</td><td class="prob-down">9%</td><td class="prob-down">↓ −3</td></tr>
+            <tr><td>05 · México cede a Rocha bajo presión extrema</td><td>8%</td><td class="prob-down">6%</td><td class="prob-down">↓ −2</td></tr>
+            <tr><td>Total</td><td>100%</td><td>100%</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <span class="divider-label">// Lectura de la ronda 5</span>
+
+        <div class="intro-text">
+          El movimiento más significativo es el escenario 2, que sube 13 puntos — el mayor salto en cualquier ronda del modelo. La razón es estructural: la CIA deja de ser variable latente y se convierte en operación documentada y activa. Ground Branch ya opera con metodología de eliminación en suelo mexicano. Hegseth le da cobertura institucional desde el Pentágono. La DEA señala pipeline activo. Y la negación de García Harfuch destruye la posición diplomática de México ante audiencias globales en el momento en que más la necesitaba. El espacio del stalemate — que requería ambigüedad sostenible — se cierra a la mitad. El escenario de ruptura diplomática parcial se comprime porque la dinámica ya saltó esa fase y va directo a hechos consumados. México llega a la revisión del TMEC del 1 de julio sin canal de interlocución, sin leverage, con operaciones letales en su territorio documentadas públicamente, y con un gobierno que eligió negarlo.
+        </div>
+
+        <div class="metodologia">
+          <p><strong>SUMA DE PROBABILIDADES:</strong> 100%</p>
+          <p><strong>VARIABLES INCORPORADAS EN R5:</strong> Declaración Hegseth · señal DEA pipeline activo · operaciones letales CIA documentadas por CNN (Ground Branch, caso Beltrán "El Payín", marzo 2026) · negación García Harfuch como amplificador narrativo</p>
+          <p><strong>MOVIMIENTO CLAVE R5:</strong> Acción unilateral 25% → 38% · Stalemate 20% → 10%</p>
+          <p><strong>HORIZONTE DE VALIDEZ:</strong> Mayo–Julio 2026 · REVISAR ANTE: acusaciones adicionales DOJ · revisión TMEC (01 JUL 2026) · midterms EU (NOV 2026) · respuesta formal de Cancillería mexicana</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div class="page">
-
-<hr class="divider">
-  <p class="section-label">// Variables críticas</p>
-
-  <div class="box box-red">
-    <p class="box-label box-label-red">▌ Déficit diplomático estructural</p>
-    <p class="box-text">México llega a esta crisis sin capital político acumulado en Washington, sin relaciones informales con la administración Trump y sin instrumentos de presión equivalentes. Sin canal de interlocución real, cada posición es pública y por lo tanto imposible de revertir sin costo político. No es una debilidad táctica — es una debilidad estructural que acorta el margen de maniobra en todos los escenarios.</p>
-  </div>
-
-  <div class="box box-amber">
-    <p class="box-label box-label-amber">▌ Variable de ruptura · Retórica de la soberanía y conquista · 5 mayo 2026</p>
-    <p class="box-text">Las declaraciones de Sheinbaum revelan un error de lectura estratégico: creer que la retórica de soberanía tiene poder disuasorio sobre Estados Unidos. Optar por la narrativa de la soberanía y la conquista no es confrontación calculada — es un regalo político. Le otorga el marco narrativo que necesita para que cualquier escalada se lea como respuesta legítima. Trump no opera con la lógica de administraciones anteriores donde México podía estirar una negociación indefinidamente. Opera con lógica de dominancia — necesita una victoria visible para las midterms, necesita que el otro lado ceda públicamente, y una declaración de este tipo debilita aún más la posición negociadora de México.</p>
-    <p class="pull-quote">"A quienes reviven la Conquista como salvación, les decimos: están destinados a la derrota."</p>
-  </div>
-
-  <div class="vars-grid">
-    <div class="var-block">
-      <p class="var-type var-up">↑ Elevan riesgo de escalada</p>
-      <p class="var-items">CIA confirmada en territorio MX · Strikes cinéticos ya ejecutados · NDCS 2026: doctrina formal · Precedente Irán y Venezuela · Déficit de interlocución en DC · Suprema Corte sin independencia · Retórica Conquista · Midterms nov 2026 · El Mayo como testigo latente</p>
-    </div>
-    <div class="var-block">
-      <p class="var-type var-down">↓ Frenan escalada</p>
-      <p class="var-items">TMEC como costo mutuo · Sector privado EU integrado con MX · Montiel operando red Bienestar · Costo reputacional de acción directa · Congreso EU como freno en año electoral</p>
-    </div>
-  </div>
-
-  <hr class="divider">
-  <p class="section-label">// Cinco escenarios · Estimaciones a mayo 2026</p>
-
-  <div class="scenario-card">
-    <div class="card-top">
-      <div class="scenario-header">
-        <div>
-          <p class="scenario-number">[ 01 / 05 ]</p>
-          <p class="scenario-name">Cascada de acusaciones — escalada EU</p>
-        </div>
-        <div class="prob-wrap">
-          <span class="prob-pill p-blue">35%</span>
-          <span class="prob-change change-up">↑ desde 28%</span>
-        </div>
+<!-- PREDICCIONES -->
+<div id="view-predicciones" class="view">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">// 02 · Análisis prospectivos</p>
+        <h2 class="section-title">Predicciones</h2>
       </div>
-      <div class="bar-wrap"><div class="bar" style="width:35%;background:var(--blue-light);"></div></div>
-      <div class="meta-grid">
-        <div>
-          <p class="meta-label">Condición activadora</p>
-          <p class="meta-value">México no actúa. La retórica de la soberanía elimina incentivos de Washington para negociar. DOJ libera las cinco acusaciones pendientes sin mediación previa posible.</p>
+      <button class="back-btn" onclick="showView('inicio')">← Inicio</button>
+    </div>
+    <div style="border: 1px solid var(--border); background: var(--bg2);">
+      <div style="padding: 20px 28px; border-bottom: 1px solid var(--border);">
+        <span style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-faint);">// Análisis prospectivo</span>
+        <h3 style="margin-top:8px; font-size:15px; font-weight:600; color:var(--white); letter-spacing:0.03em;">Próximos políticos acusados por el gobierno de Estados Unidos</h3>
+      </div>
+      <div style="padding: 8px 0;">
+        <div style="display:flex; align-items:center; gap:20px; padding: 16px 28px; border-bottom: 1px solid var(--border);">
+          <span style="font-size:9px; color:var(--text-faint); min-width:24px; letter-spacing:0.1em;">01</span>
+          <span style="font-size:13px; color:var(--text);">Américo Villarreal</span>
         </div>
-        <div>
-          <p class="meta-label">Actores clave</p>
-          <p class="meta-value">DOJ, embajador Johnson, Trump. El Mayo Zambada como detonador testimonial. Sector empresarial EU presionado por pérdida de certeza jurídica.</p>
+        <div style="display:flex; align-items:center; gap:20px; padding: 16px 28px; border-bottom: 1px solid var(--border);">
+          <span style="font-size:9px; color:var(--text-faint); min-width:24px; letter-spacing:0.1em;">02</span>
+          <span style="font-size:13px; color:var(--text);">Marina del Pilar</span>
         </div>
-        <div class="full-col">
-          <p class="meta-label">Señal de alerta temprana</p>
-          <p class="meta-value">Filtración de expedientes de Marina del Pilar o Durazo. Visa revocada a funcionario federal. Actividad procesal en Corte del Distrito Oeste de Texas.</p>
+        <div style="display:flex; align-items:center; gap:20px; padding: 16px 28px;">
+          <span style="font-size:9px; color:var(--text-faint); min-width:24px; letter-spacing:0.1em;">03</span>
+          <span style="font-size:13px; color:var(--text);">Alfredo Ramírez Bedolla</span>
         </div>
       </div>
     </div>
-    <div class="conseq-block">
-      <p class="conseq-label">// Consecuencias si ocurre</p>
-      <ul class="conseq-list">
-        <li class="conseq-item"><span class="conseq-num">01</span><p class="conseq-text"><strong>Morena pierde gobernadores en funciones.</strong> Marina del Pilar, Durazo y Villarreal enfrentan acusaciones formales. La estructura de poder territorial de Morena entra en colapso parcial antes de 2027.</p></li>
-        <li class="conseq-item"><span class="conseq-num">02</span><p class="conseq-text"><strong>El TMEC se convierte en rehén.</strong> Washington usa las acusaciones como palanca directa en la mesa de revisión del 1 de julio. México negocia desde una posición de máxima debilidad.</p></li>
-        <li class="conseq-item"><span class="conseq-num">03</span><p class="conseq-text"><strong>El testimonio de El Mayo se activa.</strong> Rocha ya no es el único problema — es la puerta a un expediente que salpica hasta AMLO.</p></li>
-      </ul>
-    </div>
   </div>
-
-  <div class="scenario-card">
-    <div class="card-top">
-      <div class="scenario-header">
-        <div>
-          <p class="scenario-number">[ 02 / 05 ]</p>
-          <p class="scenario-name">Acción unilateral EU en territorio mexicano</p>
-        </div>
-        <div class="prob-wrap">
-          <span class="prob-pill p-red">25%</span>
-          <span class="prob-change change-up">↑ desde 5%</span>
-        </div>
-      </div>
-      <div class="bar-wrap"><div class="bar" style="width:25%;background:var(--red);"></div></div>
-      <div class="meta-grid">
-        <div>
-          <p class="meta-label">Condición activadora</p>
-          <p class="meta-value">Retórica de la soberanía le otorga a Trump el marco narrativo. CIA con presencia operativa. NDCS provee doctrina. Midterms nov 2026 requieren victoria visible.</p>
-        </div>
-        <div>
-          <p class="meta-label">Actores clave</p>
-          <p class="meta-value">Pentágono, CIA, DEA, Trump. Ausencia de interlocución política desde México elimina señal de freno diplomático.</p>
-        </div>
-        <div class="full-col">
-          <p class="meta-label">Señal de alerta temprana</p>
-          <p class="meta-value">Declaraciones de Rubio o Hegseth sobre acción directa. Movimiento de activos militares en frontera. Precedente ejecutado en otro país de la región.</p>
-        </div>
-      </div>
-    </div>
-    <div class="conseq-block">
-      <p class="conseq-label">// Consecuencias si ocurre</p>
-      <ul class="conseq-list">
-        <li class="conseq-item"><span class="conseq-num">01</span><p class="conseq-text"><strong>Crisis constitucional en México.</strong> Las fuerzas armadas quedan en posición imposible — responder implica un conflicto abierto; no responder destruye la narrativa de soberanía que sostiene al gobierno.</p></li>
-        <li class="conseq-item"><span class="conseq-num">02</span><p class="conseq-text"><strong>Precedente hemisférico irreversible.</strong> Cualquier país de América Latina con presencia de cárteles queda expuesto a la misma doctrina. La soberanía territorial como principio se erosiona formalmente.</p></li>
-        <li class="conseq-item"><span class="conseq-num">03</span><p class="conseq-text"><strong>Sheinbaum sin salida política.</strong> Resistir es imposible militarmente. Ceder destruye el proyecto de la 4T. El escenario no tiene desenlace que preserve el gobierno en los términos actuales.</p></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="scenario-card">
-    <div class="card-top">
-      <div class="scenario-header">
-        <div>
-          <p class="scenario-number">[ 03 / 05 ]</p>
-          <p class="scenario-name">Stalemate prolongado</p>
-        </div>
-        <div class="prob-wrap">
-          <span class="prob-pill p-amber">20%</span>
-          <span class="prob-change change-down">↓ desde 38%</span>
-        </div>
-      </div>
-      <div class="bar-wrap"><div class="bar" style="width:20%;background:var(--gold);"></div></div>
-      <div class="meta-grid">
-        <div>
-          <p class="meta-label">Condición activadora</p>
-          <p class="meta-value">Ambos actores absorben el costo sin resolución. TMEC se negocia por carril separado. FGR dilata indefinidamente.</p>
-        </div>
-        <div>
-          <p class="meta-label">Actores clave</p>
-          <p class="meta-value">Sheinbaum, Alcalde, Montiel, AMLO como veto silencioso. Sector privado de ambos países como freno mutuo involuntario.</p>
-        </div>
-        <div class="full-col">
-          <p class="meta-label">Señal de alerta temprana</p>
-          <p class="meta-value">Rocha mantiene escolta federal. FGR no emite dictamen. Cancillería en modo protocolar sin avance concreto.</p>
-        </div>
-      </div>
-    </div>
-    <div class="conseq-block">
-      <p class="conseq-label">// Consecuencias si ocurre</p>
-      <ul class="conseq-list">
-        <li class="conseq-item"><span class="conseq-num">01</span><p class="conseq-text"><strong>La impunidad se institucionaliza.</strong> El sistema demuestra que puede proteger a sus operadores frente a presión exterior. Eso no es una victoria — es una señal de precio para futuras acusaciones.</p></li>
-        <li class="conseq-item"><span class="conseq-num">02</span><p class="conseq-text"><strong>Morena llega a 2027 con el expediente abierto.</strong> El stalemate no cierra el caso — lo congela. Cualquier candidato de Morena carga con el peso de Rocha, Villarreal y Marina del Pilar como lastre electoral.</p></li>
-        <li class="conseq-item"><span class="conseq-num">03</span><p class="conseq-text"><strong>La relación bilateral se administra en modo de daño mínimo.</strong> Sin resolución y sin ruptura, México pierde influencia progresiva en cada mesa donde no tiene leverage.</p></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="scenario-card">
-    <div class="card-top">
-      <div class="scenario-header">
-        <div>
-          <p class="scenario-number">[ 04 / 05 ]</p>
-          <p class="scenario-name">Ruptura diplomática parcial</p>
-        </div>
-        <div class="prob-wrap">
-          <span class="prob-pill p-gray">12%</span>
-          <span class="prob-change change-down">↓ desde 18%</span>
-        </div>
-      </div>
-      <div class="bar-wrap"><div class="bar" style="width:12%;background:#444;"></div></div>
-      <div class="meta-grid">
-        <div>
-          <p class="meta-label">Condición activadora</p>
-          <p class="meta-value">EU impone sanciones OFAC y aranceles sectoriales. Suprema Corte sin independencia usada como argumento técnico en revisión del TMEC.</p>
-        </div>
-        <div>
-          <p class="meta-label">Actores clave</p>
-          <p class="meta-value">Tesoro EU, USTR, sector empresarial estadounidense. Ebrard como amortiguador desde Economía.</p>
-        </div>
-        <div class="full-col">
-          <p class="meta-label">Señal de alerta temprana</p>
-          <p class="meta-value">Designación OFAC de funcionario federal mexicano. USTR menciona rule of law en declaraciones sobre TMEC. Suspensión de mesas de seguridad bilateral.</p>
-        </div>
-      </div>
-    </div>
-    <div class="conseq-block">
-      <p class="conseq-label">// Consecuencias si ocurre</p>
-      <ul class="conseq-list">
-        <li class="conseq-item"><span class="conseq-num">01</span><p class="conseq-text"><strong>El nearshoring entra en pausa.</strong> Las designaciones OFAC y la pérdida formal de certeza jurídica detienen decisiones de inversión que dependían de la estabilidad institucional mexicana.</p></li>
-        <li class="conseq-item"><span class="conseq-num">02</span><p class="conseq-text"><strong>El TMEC se renegocia desde debilidad máxima.</strong> Washington usa el argumento de la Suprema Corte para imponer condiciones en el capítulo de solución de controversias.</p></li>
-        <li class="conseq-item"><span class="conseq-num">03</span><p class="conseq-text"><strong>La presión migra del gobierno al mercado.</strong> El sector privado mexicano empieza a presionar a Sheinbaum desde adentro con más fuerza que Washington desde afuera.</p></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="scenario-card">
-    <div class="card-top">
-      <div class="scenario-header">
-        <div>
-          <p class="scenario-number">[ 05 / 05 ]</p>
-          <p class="scenario-name">México cede a Rocha bajo presión extrema</p>
-        </div>
-        <div class="prob-wrap">
-          <span class="prob-pill p-red">8%</span>
-          <span class="prob-change change-down">↓ desde 11%</span>
-        </div>
-      </div>
-      <div class="bar-wrap"><div class="bar" style="width:8%;background:var(--red);"></div></div>
-      <div class="meta-grid">
-        <div>
-          <p class="meta-label">Condición activadora</p>
-          <p class="meta-value">Costo acumulado supera el costo del efecto dominó. Pero la retórica de la soberanía hace imposible ceder sin destrucción política interna.</p>
-        </div>
-        <div>
-          <p class="meta-label">Actores clave</p>
-          <p class="meta-value">Sheinbaum, García Harfuch, FGR. Sin leverage, las condiciones las dicta Washington y México no puede aceptarlas públicamente.</p>
-        </div>
-        <div class="full-col">
-          <p class="meta-label">Señal de alerta temprana</p>
-          <p class="meta-value">Cambio abrupto de tono en FGR. Rocha pierde escolta federal. Silencio prolongado de AMLO. Viaje discreto de funcionario de alto nivel a Washington sin agenda declarada.</p>
-        </div>
-      </div>
-    </div>
-    <div class="conseq-block">
-      <p class="conseq-label">// Consecuencias si ocurre</p>
-      <ul class="conseq-list">
-        <li class="conseq-item"><span class="conseq-num">01</span><p class="conseq-text"><strong>La entrega no detiene la cascada.</strong> El DOJ continúa. Entregar a Rocha abre el canal por el cual el testimonio destruye lo que queda de la arquitectura política de Morena.</p></li>
-        <li class="conseq-item"><span class="conseq-num">02</span><p class="conseq-text"><strong>Fractura irreparable dentro de Morena.</strong> Ceder después de la retórica de la Conquista es capitulación pública. El bloque legislativo y los gobernadores que quedan pierden razón para mantenerse unidos.</p></li>
-        <li class="conseq-item"><span class="conseq-num">03</span><p class="conseq-text"><strong>2027 sin candidato viable.</strong> Cualquier figura de Morena carga con el expediente abierto, el antecedente de la cesión y la narrativa de que el proyecto fue exactamente lo que la oposición decía que era.</p></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="total-row">
-    <span class="total-label">Suma de probabilidades</span>
-    <span class="total-value">100%</span>
-  </div>
-
-  <div class="footer-block">
-    <p class="footer-text">VARIABLES INTEGRADAS: CIA en territorio MX · doctrina NDCS 2026 · precedentes Irán–Venezuela · déficit diplomático estructural · Suprema Corte sin independencia · retórica de soberanía y conquista · efecto dominó Morena · calendario electoral bilateral</p>
-    <p class="footer-text">HORIZONTE DE VALIDEZ: mayo–julio 2026 &nbsp;·&nbsp; REVISAR ANTE: acusaciones adicionales DOJ · revisión TMEC (01 JUL 2026) · midterms EU (NOV 2026)</p>
-    <p class="footer-text" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);">METODOLOGÍA: Análisis prospectivo de escenarios con actualización bayesiana · Cuatro rondas de recalibración: (1) línea base — acusaciones DOJ y contexto bilateral; (2) incorporación de déficit diplomático estructural y doctrina NDCS 2026; (3) integración de precedentes Irán–Venezuela y pérdida de independencia de la Suprema Corte como factor de certeza jurídica; (4) recalibración final tras retórica de soberanía y conquista del 5 de mayo de 2026 · Movimientos clave: probabilidad de acción unilateral estadounidense 5% → 25% · escenario de stalemate 38% → 20%</p>
-  </div>
-
 </div>
+
+<!-- POLYMARKET -->
+<div id="view-polymarket" class="view">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">// 03 · Mercados de predicción</p>
+        <h2 class="section-title">Polymarket</h2>
+      </div>
+      <button class="back-btn" onclick="showView('inicio')">← Inicio</button>
+    </div>
+
+    <div style="border: 1px solid var(--border); background: var(--bg2); margin-bottom: 12px;">
+      <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); display:flex; align-items:baseline; justify-content:space-between;">
+        <span style="font-size:11px; font-weight:600; color:var(--white); letter-spacing:0.03em;">Sinaloa Gov. Rubén Rocha extradited to US by May 15?</span>
+        <span style="font-size:9px; color:var(--text-faint); letter-spacing:0.1em;">Activo</span>
+      </div>
+      <div style="padding: 20px 24px;">
+        <figure class="polymarket-embed" id="polymarket-sinaloa-gov-ruben-rocha-extradited-to-us-by-may-15" style="position:relative;display:inline-block;margin:0;">
+          <iframe
+            title="Sinaloa Gov. Ruben Rocha extradited to US by May 15? — Polymarket Prediction Market"
+            src="https://embed.polymarket.com/market?market=sinaloa-gov-ruben-rocha-extradited-to-us-by-may-15&theme=dark&creator=aaastro&height=300"
+            width="400"
+            height="300"
+            frameborder="0"
+            allowtransparency="true">
+          </iframe>
+          <a href="https://polymarket.com/event/sinaloa-gov-ruben-rocha-extradited-to-us-by"
+            aria-label="View on Polymarket"
+            target="_blank"
+            rel="noopener"
+            style="position:absolute;top:16px;right:20px;width:120px;height:24px;z-index:10">
+          </a>
+          <figcaption style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
+            <strong>Sinaloa Gov. Ruben Rocha extradited to US by May 15?</strong><br>
+            Yes 2% · No 98%<br>
+            <a href="https://polymarket.com/event/sinaloa-gov-ruben-rocha-extradited-to-us-by">View full market &amp; trade on Polymarket</a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div style="border: 1px solid var(--border); background: var(--bg2); margin-bottom: 12px;">
+      <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); display:flex; align-items:baseline; justify-content:space-between;">
+        <span style="font-size:11px; font-weight:600; color:var(--white); letter-spacing:0.03em;">Sinaloa Gov. Rubén Rocha arrested by May 31?</span>
+        <span style="font-size:9px; color:var(--text-faint); letter-spacing:0.1em;">Activo</span>
+      </div>
+      <div style="padding: 20px 24px;">
+        <figure class="polymarket-embed" id="polymarket-sinaloa-gov-ruben-rocha-arrested-by-may-31" style="position:relative;display:inline-block;margin:0;">
+          <iframe
+            title="Sinaloa Gov. Ruben Rocha arrested by May 31? — Polymarket Prediction Market"
+            src="https://embed.polymarket.com/market?market=sinaloa-gov-ruben-rocha-arrested-by-may-31&theme=dark&creator=aaastro&height=300"
+            width="400"
+            height="300"
+            frameborder="0"
+            allowtransparency="true">
+          </iframe>
+          <a href="https://polymarket.com/event/sinaloa-gov-ruben-rocha-arrested-by-may-31"
+            aria-label="View on Polymarket"
+            target="_blank"
+            rel="noopener"
+            style="position:absolute;top:16px;right:20px;width:120px;height:24px;z-index:10">
+          </a>
+          <figcaption style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
+            <strong>Sinaloa Gov. Ruben Rocha arrested by May 31?</strong><br>
+            Yes 20% · No 80%<br>
+            <a href="https://polymarket.com/event/sinaloa-gov-ruben-rocha-arrested-by-may-31">View full market &amp; trade on Polymarket</a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="view-columnas" class="view">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-eyebrow">// 03 · Opinión documentada</p>
+        <h2 class="section-title">Columnas</h2>
+      </div>
+      <button class="back-btn" onclick="showView('inicio')">← Inicio</button>
+    </div>
+    <div class="placeholder"><p>Próximamente — columnas de análisis político</p></div>
+  </div>
+</div>
+
+<script>
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('view-' + id).classList.add('active');
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+</script>
+
 </body>
 </html>
